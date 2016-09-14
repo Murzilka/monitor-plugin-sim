@@ -40,8 +40,7 @@ const server = http.createServer((req, res) => {
 
 	const reqToPipe = http.request(options, function (resFromPipe) {
 		console.log(`${reqId}: piped responce status is ${resFromPipe.statusCode}`);
-		//resFromPipe.setEncoding('utf8');
-		res.statusCode = resFromPipe.statusCode;
+		res.writeHead(resFromPipe.statusCode, resFromPipe.headers);
 		resFromPipe.pipe(res);
 	}).on('error', function (errFromPipe) {
 		console.log(`${reqId}: error on request: ${inspect(errFromPipe)}`);
