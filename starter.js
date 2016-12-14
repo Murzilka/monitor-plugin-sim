@@ -2,7 +2,10 @@
 
 const process = require('process')
 	, inspect = require('util').inspect
+	, path = require('path')
 	;
+
+process.chdir(process.cwd() + '/arm');
 
 process.on('message', function(api) {
 	if (api && api.Name) {
